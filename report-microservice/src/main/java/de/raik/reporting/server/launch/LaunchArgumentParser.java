@@ -27,7 +27,10 @@ public class LaunchArgumentParser {
     private static final Map<String, String> DEFAULT_ARGUMENTS = Map.of(
             "file.name", "reports.csv",
             "file.path", "./",
-            "configClass", "de.raik.reporting.server.config.file.CSVConfig"
+            "configClass", "de.raik.reporting.server.config.file.CSVConfig",
+            "rest.port", "1337",
+            "rest.authKey", "hKw0dKTBJ2KLqgzJVRAV2aJu",
+            "editorClass", "de.raik.reporting.server.editor.rest.RestEditor"
     );
 
     /**
