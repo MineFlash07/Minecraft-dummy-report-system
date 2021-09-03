@@ -1,0 +1,3 @@
+microservice:
+  urn: 'http://localhost:1337'
+  authKey: 'hKw0dKTBJ2KLqgzJVRAV2aJu'

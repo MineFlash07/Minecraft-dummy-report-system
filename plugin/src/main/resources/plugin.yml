@@ -1,0 +1,11 @@
+name: ReportDummy
+main: de.raik.reporting.spigot.ReportPlugin
+version: 1.0
+author: MineFlash07
+prefix: Report
+commands:
+  report:
+    usage: /<command> <player> <reason>
+permissions:
+  reports.manage:
+    default: op
