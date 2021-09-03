@@ -24,7 +24,11 @@ public class LaunchArgumentParser {
      * to start the service even without parsing specific or even none
      * arguments.
      */
-    private static final Map<String, String> DEFAULT_ARGUMENTS = Map.of();
+    private static final Map<String, String> DEFAULT_ARGUMENTS = Map.of(
+            "file.name", "reports.csv",
+            "file.path", "./",
+            "configClass", "de.raik.reporting.server.config.file.CSVConfig"
+    );
 
     /**
      * HashMap containing all parsed arguments

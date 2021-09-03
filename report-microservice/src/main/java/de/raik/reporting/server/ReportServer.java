@@ -10,6 +10,7 @@ import de.raik.reporting.server.launch.LaunchArgumentParser;
 import de.raik.reporting.server.report.Report;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 /**
@@ -64,10 +65,18 @@ public final class ReportServer {
          * The accessor having access to the reports to edit them dynamically
          * Create and set accessors. Also adding config and editor
          * Using ReportAccessorService to get all registered accessors
+         * Using LinkedHashSet to let the config be initiated before the config
          */
-        HashSet<ReportAccessor> accessors = new HashSet<>(new ReportAccessorService<>(ReportAccessor.class).getLoaded());
+        LinkedHashSet<ReportAccessor> accessors = new LinkedHashSet<>(new ReportAccessorService<>(ReportAccessor.class).getLoaded());
         accessors.add(this.config);
         accessors.add(this.editor);
+
+        //Set editor callback
+        this.editor.setUpdateCallback(() -> {
+            if (this.config.shouldSaveEverytime()) {
+                this.config.saveConfig();
+            }
+        });
 
         // Initialize accessors
         accessors.forEach(accessor -> accessor.initAccessor(this.reports));
@@ -92,7 +101,8 @@ public final class ReportServer {
             notClosed = scanner.nextLine().equalsIgnoreCase("close");
         } while (!notClosed);
 
-        //Close the editor
+        //Close the editor and save the config
+        this.config.saveConfig();
         this.editor.shutdown();
     }
 
