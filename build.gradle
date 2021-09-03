@@ -1,0 +1,6 @@
+defaultTasks 'clean', 'build'
+
+subprojects {
+    group 'de.raik.reporting'
+    version project.hasProperty("plugin.version") ? project.findProject("plugin.version") : 'HEAD-SNAPSHOT'
+}

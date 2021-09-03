@@ -1,0 +1,9 @@
+plugins {
+    id 'application'
+}
+
+java {
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
+}
+
+compileJava.options.encoding = "UTF-8"

@@ -1,0 +1,4 @@
+rootProject.name = 'Minecraft-dummy-report-system'
+include 'report-microservice'
+include 'plugin'
+
