@@ -7,9 +7,8 @@ import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
 import de.raik.reporting.server.report.Report;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 
 /**
@@ -61,18 +60,22 @@ public class GetReportsHandler extends ReportHttpHandler {
             reportObject.addProperty("reason", report.reportReason());
             reportObject.addProperty("reporter", report.reporter().toString());
             reportObject.addProperty("date", report.timestamp().toString());
-        });
 
-        //Sending json
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(httpExchange.getResponseBody()))) {
-            writer.write(GSON.toJson(array));
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+            array.add(reportObject);
+        });
 
         //Setting content type and codes
         httpExchange.getResponseHeaders().add("Content-Type", "application/json");
         httpExchange.sendResponseHeaders(200, 0);
+
+        //Sending json
+        try {
+            httpExchange.getResponseBody().write(GSON.toJson(array).getBytes(StandardCharsets.UTF_8));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+
         httpExchange.close();
     }
 

@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 repositories {
@@ -11,7 +12,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "de.raik.reporting.launch.ReportServerLauncher"
+    mainClassName = "de.raik.reporting.server.launch.ReportServerLauncher"
 }
 
 java {

@@ -69,7 +69,7 @@ public class LaunchArgumentParser {
         prefixKeyValueMap.forEach((prefixKey, value) -> {
             String[] prefixKeySplit = prefixKey.split("\\.", 2);
             //Put in the right map from the key splits
-            this.getKeyHashMap(prefixKeySplit).put(prefixKeySplit[1], value);
+            this.getKeyHashMap(prefixKeySplit).put(prefixKeySplit.length == 2 ? prefixKeySplit[1]: prefixKeySplit[0], value);
         });
     }
 
@@ -84,7 +84,7 @@ public class LaunchArgumentParser {
     public LaunchArgumentParser supplyArgument(String key, Consumer<String> consumer) {
         String[] prefixKeySplit = key.split("\\.", 2);
         //Get the right map and get the value from the key which will be accepted into the consumer
-        consumer.accept(this.getKeyHashMap(prefixKeySplit).get(prefixKeySplit[1]));
+        consumer.accept(this.getKeyHashMap(prefixKeySplit).get(prefixKeySplit.length == 2 ? prefixKeySplit[1]: prefixKeySplit[0]));
 
         return this;
     }
